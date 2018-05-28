@@ -1,0 +1,2 @@
+﻿#Find out what mailbox is redirecting forwarding where and put it in a heplful CSV
+foreach ($mbx in (Get-Mailbox -ResultSize unlimited)) { Get-InboxRule -Mailbox $mbx.DistinguishedName | where {($_.ForwardTo -ne  $null) -or ($_.redirectto -ne $null) -or ($_.forwardasattachment -ne $null)} | select  MailboxOwnerID,Name,ForwardTo | export-csv d:\exchangeforwards.csv} -Notypeinformation
